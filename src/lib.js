@@ -1,10 +1,13 @@
-const Manager = require("./Manager");
-const Engineer = require("./Engineer");
-const Intern = require("./Intern");
+const Manager = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
+const Intern = require("../lib/Intern");
 
+//function to generate HTML for a page given an array of employee objects
 function generateHTML(teamData) {
+    //call generateCards which returns html for each card in the teamData array
     let cardsHTML = generateCards(teamData);
     
+    //return HTML for a whole page with inserted employee cards
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -31,6 +34,8 @@ function generateHTML(teamData) {
 
   };
   
+
+  
 function generateCards(teamArray){
     let cardHTML = '';
     
@@ -51,7 +56,7 @@ function generateCards(teamArray){
         <li class="list-group-item">Office number: ${teamMember.officeNumber}</li>`;
           } else if(teamMember.getRole() === "Engineer"){
             cardHTML = cardHTML + `
-            <li class="list-group-item">GitHub: <p><a href="https://github.com/${teamMember.gitHub}/">${teamMember.gitHub}</a></p></li>`;
+            <li class="list-group-item">GitHub: <a href="https://github.com/${teamMember.gitHub}/">${teamMember.gitHub}</a></li>`;
         } else if(teamMember.getRole() === "Intern"){
             cardHTML = cardHTML + `
             <li class="list-group-item">School: ${teamMember.school}</li>`;

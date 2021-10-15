@@ -6,8 +6,8 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-const generateHTML = require('./lib/lib');
-const { writeFile, copyFile } = require('./utils/generate-site');
+const generateHTML = require('./src/lib');
+const writeFile = require('./src/generate-site');
 
 const teamData = [];
 
@@ -142,11 +142,6 @@ const promptTeamMember = () => {
 
         writeFile(pageHTML)
         .then(writeFileResponse => {
-        console.log(`writeFileResponse: ${writeFileResponse}`);
-        copyFile();
-        })
-        .then(copyFileResponse => {
-        console.log(`copyFileResponse: ${copyFileResponse}`);
         })
         .catch(err => {
         console.log(err);
