@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/wendyqnguyen/team-profile-generator#readme",
   "devDependencies": {
-    "jest": "^27.2.4"
+    "jest": "^27.2.5"
   },
   "dependencies": {
     "inquirer": "^8.1.5",
