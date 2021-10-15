@@ -33,28 +33,6 @@ const managerQuestions = [
         message: "Please enter the manager's office number >> "
     }]   
 
-const employeeQuestions = [
-    {
-        type: 'input',
-        name: 'name',
-        message: "Please enter the employee's name >> "
-    },
-    {
-        type: 'number',
-        name: 'id',
-        message: "Please enter the employee's ID >> "
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: "Please enter the employee's email >> "
-    },
-    {
-        type: 'number',
-        name: 'office',
-        message: "Please enter the manager's office number >> "
-    }]  
-
 const engineerQuestions = [
     {
         type: 'input',
@@ -99,20 +77,10 @@ const internQuestions = [
         message: "Please enter the engineer's school >> "
     }] 
     
-// Function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, function(err) {
 
-        if (err) {
-          return console.log(err);
-        }
-      
-        console.log("Done!");
-      
-      });
-}
-
-//functions to prompt user for various types of employee data
+//functions to prompt user for manager data
+//use answers to create a new manager object and push that object onto the team array
+//when finished, call promptTeamMember function to as user what to do next
 const promptManager = () => {
     inquirer.prompt(managerQuestions)
     .then(managerData => {
@@ -123,6 +91,7 @@ const promptManager = () => {
   };
 
 const promptTeamMember = () => {
+    //prompt user for what to do next Add Engineer|Add Intern|Finish Building Team
     console.log(`
     =====================
     Add a New Team Member
@@ -137,26 +106,32 @@ const promptTeamMember = () => {
             choices: ['Add an engineer', 'Add an intern', 'Finish building team']
         }])
     .then(answer => {
-      if (answer.addEmployee === 'Finish building team') {
-        let pageHTML = generateHTML(teamData);
-
-        writeFile(pageHTML)
-        .then(writeFileResponse => {
-        })
-        .catch(err => {
-        console.log(err);
-        });
+        //If 'Finish Building Team is chosen
+        //call generateHTML to generate the HTML content using the array of team members
+        if (answer.addEmployee === 'Finish building team') {
+            let pageHTML = generateHTML(teamData);
+            //after HTML is generated, create a file using HTML as content
+            writeFile(pageHTML)
+            .then(writeFileResponse => {
+            })
+            .catch(err => {
+            console.log(err);
+            });
 
       } else if (answer.addEmployee === 'Add an engineer') {
-        return promptEngineer();
+          //if 'Add an engineer' is selected call the function to prompt for engineer info
+          return promptEngineer();
       } else if (answer.addEmployee === 'Add an intern') {
-        return promptIntern();
+        //if 'Add an intern' is selected call the function to prompt for intern info
+            return promptIntern();
         }
     });
   };
 
   const promptEngineer = () => {
-
+    //prompt for engineer info
+    //use answers to create a new engineer object and push that object onto the team array
+    //when finished, call promptTeamMember again to as user what to do next
     return inquirer.prompt(engineerQuestions)
     .then(engineerData => {
         let newEngineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
@@ -166,7 +141,9 @@ const promptTeamMember = () => {
   };
 
   const promptIntern  = () => {
-
+    //prompt for intern info
+    //use answers to create a new intern object and push that object onto the team array
+    //when finished, call promptTeamMember again to as user what to do next
     return inquirer.prompt(internQuestions)
       .then(internData => {
           let newIntern = new Intern(internData.name, internData.id, internData.email, internData.school);
