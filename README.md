@@ -33,7 +33,7 @@ Link: https://github.com/wendyqnguyen/team-profile-generator
 
 Enter app command "node index.js" and follow prompt. once all team information has been entered, a file called "team.html" will be created in the 'dist' directory.
 
-Demo video: 
+Demo video: https://watch.screencastify.com/v/QWYWqXzl7n2WgbUP1T7f
 
 ## License 
     None
